@@ -72,7 +72,7 @@ def home(request):
 
             summary_text = " ".join(important_sentences)
 
-    return render(request, "home.html", {
+    return render(request,"analyzer/home.html", {
         "notes": notes_text,
         "points": important_sentences,
         "summary": summary_text,
