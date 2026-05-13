@@ -1,3 +1,5 @@
 Django==5.2
 gunicorn==22.0.0
 whitenoise==6.9.0
+nltk
+PyPDF2
