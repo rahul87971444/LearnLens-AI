@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>LearnLens AI</title>
+
+<style>
+body{
+    font-family: Arial;
+    background: linear-gradient(to right,#1f4037,#99f2c8);
+    margin:0;
+}
+
+.container{
+    width:80%;
+    margin:auto;
+    margin-top:30px;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    margin-bottom:20px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
+
+h1{
+    text-align:center;
+    color:white;
+}
+
+button{
+    background:#1f4037;
+    color:white;
+    padding:10px 20px;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+textarea{
+    width:100%;
+    padding:10px;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>LearnLens AI</h1>
+
+<div class="container">
+
+<div class="card">
+
+<form method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+
+<textarea name="notes" rows="8" placeholder="Paste notes here"></textarea>
+
+<br><br>
+
+<label>Upload PDF:</label>
+<input type="file" name="pdf_file">
+
+<br><br>
+
+<button type="submit">Analyze</button>
+
+</form>
+
+</div>
+
+
+{% if notes %}
+<div class="card">
+<h2>Your Notes</h2>
+<p>{{ notes }}</p>
+</div>
+{% endif %}
+
+
+{% if points %}
+<div class="card">
+<h2>Important Points</h2>
+<ul>
+{% for sentence in points %}
+<li>{{ sentence }}</li>
+{% endfor %}
+</ul>
+</div>
+{% endif %}
+
+
+{% if summary %}
+<div class="card">
+<h2>Summary</h2>
+<p>{{ summary }}</p>
+
+<form action="/download/" method="GET">
+<input type="hidden" name="summary" value="{{ summary }}">
+<br>
+<button type="submit">Download PDF</button>
+</form>
+
+</div>
+{% endif %}
+
+
+{% if concepts %}
+<div class="card">
+<h2>Main Concepts</h2>
+<ul>
+{% for concept in concepts %}
+<li>{{ concept }}</li>
+{% endfor %}
+</ul>
+</div>
+{% endif %}
+
+</div>
+
+</body>
+</html>
