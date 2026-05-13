@@ -5,6 +5,9 @@ from nltk.corpus import stopwords
 from collections import Counter
 from reportlab.pdfgen import canvas
 from PyPDF2 import PdfReader
+import nltk
+nltk.download('punkt')
+nltk.download('stopwords')
 
 
 def home(request):
